@@ -674,8 +674,11 @@ class Generate {
 			case 46:
 				HMachine.memory[cell] = HMachine.PUSH;
 				HMachine.memory[cell + 1] = HMachine.undefined;
-				stackPush(cell + 1, returnAddrStack);
-				cell = cell + 2;
+				HMachine.memory[cell + 2] = HMachine.PUSHMT;
+				HMachine.memory[cell + 3] = HMachine.PUSH;
+				HMachine.memory[cell + 4] = HMachine.undefined;
+				stackPush(cell + 4, returnAddrStack);
+				cell = cell + 5;
 				break;
 			// R47: Instruction to call a function
 			case 47:
@@ -687,7 +690,14 @@ class Generate {
 				HMachine.memory[cell] = HMachine.PUSH;
 				HMachine.memory[cell + 1] = entryAddr;
 				HMachine.memory[cell + 2] = HMachine.BR;
-				cell = cell + 3;
+				// After function returns, load the return value
+				HMachine.memory[cell + 3] = HMachine.LOAD;
+				// Swap with the undefined slot below and pop it
+				HMachine.memory[cell + 4] = HMachine.FLIP;
+				HMachine.memory[cell + 5] = HMachine.PUSH;
+				HMachine.memory[cell + 6] = 1;
+				HMachine.memory[cell + 7] = HMachine.POP;
+				cell = cell + 8;
 				break;
 			// R49 : construct instructions similar to R31
 			// for non-function identifier
@@ -696,8 +706,11 @@ class Generate {
 				if (kode == Bucket.FUNCTION) {
 					HMachine.memory[cell] = HMachine.PUSH;
 					HMachine.memory[cell + 1] = HMachine.undefined;
-					stackPush(cell + 1, returnAddrStack);
-					cell = cell + 2;
+					HMachine.memory[cell + 2] = HMachine.PUSHMT;
+					HMachine.memory[cell + 3] = HMachine.PUSH;
+					HMachine.memory[cell + 4] = HMachine.undefined;
+					stackPush(cell + 4, returnAddrStack);
+					cell = cell + 5;
 				} else
 					obtainAddress();
 
@@ -716,7 +729,14 @@ class Generate {
 					HMachine.memory[cell] = HMachine.PUSH;
 					HMachine.memory[cell + 1] = entryAddr;
 					HMachine.memory[cell + 2] = HMachine.BR;
-					cell = cell + 3;
+					// After function returns, load the return value
+					HMachine.memory[cell + 3] = HMachine.LOAD;
+					// Swap with the undefined slot below and pop it
+					HMachine.memory[cell + 4] = HMachine.FLIP;
+					HMachine.memory[cell + 5] = HMachine.PUSH;
+					HMachine.memory[cell + 6] = 1;
+					HMachine.memory[cell + 7] = HMachine.POP;
+					cell = cell + 8;
 				} else {
 					HMachine.memory[cell] = HMachine.LOAD;
 					cell = cell + 1;

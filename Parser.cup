@@ -86,9 +86,9 @@ nonterminal
 program, scope, statements, statement, optElse,
 assignOrCall, assignExpression, subscript, expression, optRelation,
 lessOrLessEq, greaterOrGreaterEq, simpleExpression, moreTerms, term,
-moreFactors, factor, primary, subsOrCall, arguments,
+moreFactors, factor, primary, subsOrCall, arguments, optArguments,
 moreArguments, declarations, moreDeclarations, declaration, funcBody,
-procBody, type, optArrayBound, parameters, moreParameters,
+procBody, type, optArrayBound, parameters, optParameters, moreParameters,
 outputs, output, moreOutput, inputs, input,
 moreInputs, optSubscript, _current, _numconst, _strconst,
 C0, C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13, C14, C15,
@@ -132,7 +132,7 @@ optElse            ::= R10
                    |   ELSE R7 R10 statements R9 ;
 
 assignOrCall       ::= C28 R45 R44 C7
-                   |   C28 LPAREN R45 arguments RPAREN R44 C7
+                   |   C28 LPAREN R45 optArguments RPAREN R44 C7
                    |   ASSGN C20 R31 assignExpression
                    |   LBRACKET C21 R40 subscript RBRACKET ASSGN assignExpression ;
 
@@ -184,10 +184,13 @@ primary            ::= _numconst NUMCONST C9 R36
                    |   _current IDENT C6 subsOrCall ;
 
 subsOrCall         ::= C37 R49 C8 R50 C7
-                   |   C33 LPAREN R46 arguments RPAREN C8 R47 C7
+                   |   C33 LPAREN R46 optArguments RPAREN C8 R47 C7
                    |   LBRACKET C21 R40 subscript RBRACKET C8 R32 C7 ;
 
 arguments          ::= expression C11 R48 moreArguments ;
+
+optArguments       ::=
+                   |   arguments ;
 
 moreArguments      ::=
                    |   LISTSEP expression C11 R48 moreArguments ;
@@ -203,10 +206,10 @@ declaration        ::= VAR _current IDENT C3 C4 optArrayBound AS type C5 C11 C7
                    |   PROC _current IDENT C24 C22 R7 C0 R1 procBody ;
 
 funcBody           ::= EQ R4 expression C36 R33 C11 C11 C2 R6 R43 R9 C7
-                   |   LPAREN parameters C1 RPAREN EQ expression C36 C11 C11 R6 R43 R9 C7 ;
+                   |   LPAREN optParameters C1 RPAREN EQ expression C36 C11 C11 R6 R43 R9 C7 ;
 
 procBody           ::= scope C2 R5 R42 R9 C7
-                   |   LPAREN parameters C1 RPAREN scope R5 R42 R9 C7 ;
+                   |   LPAREN optParameters C1 RPAREN scope C2 R5 R42 R9 C7 ;
 
 type               ::= INT C9
                    |   BOOL C10;
@@ -215,6 +218,9 @@ optArrayBound      ::= C18 R37
                    |   LBRACKET simpleExpression C12 C11 R39 RBRACKET C19;
 
 parameters         ::= _current IDENT C3 C4 AS type C5 C11 C7 moreParameters ;
+
+optParameters      ::=
+                   |   parameters ;
 
 moreParameters     ::=
                    |   LISTSEP _current IDENT C3 C4 AS type C5 C11 C7 moreParameters ;

@@ -253,8 +253,6 @@ class Context {
 				symbolStack.push(currentStr);
 				break;
 			case 26:
-				System.out.println("DEBUG C26: currentStr=" + currentStr + ", lexicalLevel=" + lexicalLevel);
-				System.out.println("DEBUG C26: isExist=" + symbolHash.isExist(currentStr, lexicalLevel));
 				if (symbolHash.isExist(currentStr, lexicalLevel)) {
 					System.out.println(
 							"Function already declared at line " +

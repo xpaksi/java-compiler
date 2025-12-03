@@ -1,13 +1,17 @@
 {
     var x: integer
-    var y: integer
-    var z: boolean
+    proc doubleX()
+    { ; x := x * 2 }
     
-    integer func getDouble = z
+    proc tripleX()
+    {; x := x * 3}
     ;
     
-    x := 5   
-    y := getDouble
+    x := 20
     
-    put y
+    doubleX
+    put x
+    
+    tripleX()
+    put x
 }
