@@ -682,6 +682,7 @@ class Generate {
 				top = stackPop(returnAddrStack, top);
 				HMachine.memory[top] = cell + 3;
 
+				// Branch to function
 				entryAddr = Context.symbolHash.find(Context.currentStr).getCodeAddress();
 				HMachine.memory[cell] = HMachine.PUSH;
 				HMachine.memory[cell + 1] = entryAddr;
@@ -692,11 +693,12 @@ class Generate {
 			// for non-function identifier
 			case 49:
 				kode = Context.symbolHash.find(Context.currentStr).getIdKind();
-
-				if (kode == Bucket.FUNCTION)
-					System.out.println(
-							"Unable to perform function implemetation.");
-				else
+				if (kode == Bucket.FUNCTION) {
+					HMachine.memory[cell] = HMachine.PUSH;
+					HMachine.memory[cell + 1] = HMachine.undefined;
+					stackPush(cell + 1, returnAddrStack);
+					cell = cell + 2;
+				} else
 					obtainAddress();
 
 				break;
@@ -704,11 +706,18 @@ class Generate {
 			// for non-function identifier
 			case 50:
 				kode = Context.symbolHash.find(Context.currentStr).getIdKind();
+				if (kode == Bucket.FUNCTION) {
 
-				if (kode == Bucket.FUNCTION)
-					System.out.println(
-							"Unable to perform function implemetation.");
-				else {
+					top = stackPop(returnAddrStack, top);
+					HMachine.memory[top] = cell + 3;
+
+					// Branch to function
+					entryAddr = Context.symbolHash.find(Context.currentStr).getCodeAddress();
+					HMachine.memory[cell] = HMachine.PUSH;
+					HMachine.memory[cell + 1] = entryAddr;
+					HMachine.memory[cell + 2] = HMachine.BR;
+					cell = cell + 3;
+				} else {
 					HMachine.memory[cell] = HMachine.LOAD;
 					cell = cell + 1;
 				}
