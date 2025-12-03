@@ -1,150 +1,139 @@
-class Bucket
-{
-    public Bucket()
-    {
-    }
+class Bucket {
 
-    public Bucket(String idName)
-    {
-        this.idName = idName;
-        this.lexicLev = UNDEFINED;
-        this.orderNum = UNDEFINED;
-        this.idType = UNDEFINED;
-        this.idKind = UNDEFINED;
-        this.nextBucket = null;
-    }
+	public Bucket() {
+	}
 
-    public void setIdName(String idName)
-    {
-        this.idName = idName;
-    }
+	public Bucket(String idName) {
+		this.idName = idName;
+		this.lexicLev = UNDEFINED;
+		this.orderNum = UNDEFINED;
+		this.idType = UNDEFINED;
+		this.idKind = UNDEFINED;
+		this.codeAddress = UNDEFINED;
+		this.nextBucket = null;
+	}
 
-    public void setLexicLev(int lexicLev)
-    {
-        this.lexicLev = lexicLev;
-    }
+	public void setIdName(String idName) {
+		this.idName = idName;
+	}
 
-    public void setOrderNum(int orderNum)
-    {
-        this.orderNum = orderNum;
-    }
+	public void setLexicLev(int lexicLev) {
+		this.lexicLev = lexicLev;
+	}
 
-    public void setLLON(int lexicLev, int orderNum)
-    {
-        this.lexicLev = lexicLev;
-        this.orderNum = orderNum;
-    }
+	public void setOrderNum(int orderNum) {
+		this.orderNum = orderNum;
+	}
 
-    public void setIdType(int idType)
-    {
-        this.idType = idType;
-    }
+	public void setLLON(int lexicLev, int orderNum) {
+		this.lexicLev = lexicLev;
+		this.orderNum = orderNum;
+	}
 
-    public void setIdKind(int idKind)
-    {
-        this.idKind = idKind;
-    }
+	public void setIdType(int idType) {
+		this.idType = idType;
+	}
 
-    public void setNextBucket()
-    {
-        nextBucket = null;
-    }
+	public void setIdKind(int idKind) {
+		this.idKind = idKind;
+	}
 
-    public void setNextBucket(Bucket next)
-    {
-        nextBucket = next;
-    }
+	public void setNextBucket() {
+		nextBucket = null;
+	}
 
-    public String getIdName()
-    {
-        return idName;
-    }
+	public void setNextBucket(Bucket next) {
+		nextBucket = next;
+	}
 
-    public int getLexicLev()
-    {
-        return lexicLev;
-    }
+	public void setCodeAddress(int addr) {
+		this.codeAddress = addr;
+	}
 
-    public int getOrderNum()
-    {
-        return orderNum;
-    }
+	public String getIdName() {
+		return idName;
+	}
 
-    public int getIdType()
-    {
-        return idType;
-    }
+	public int getLexicLev() {
+		return lexicLev;
+	}
 
-    public int getIdKind()
-    {
-        return idKind;
-    }
+	public int getOrderNum() {
+		return orderNum;
+	}
 
-    public String getIdTypeStr()
-    {
-        String type = null;
+	public int getIdType() {
+		return idType;
+	}
 
-        switch (idType)
-        {
-            case INTEGER:
-                type = "integer";
-                break;
-            case BOOLEAN:
-                type = "boolean";
-                 break;
-            case UNDEFINED:
-                type = "undefined";
-                break;
-        }
+	public int getIdKind() {
+		return idKind;
+	}
 
-        return type;
-    }
+	public String getIdTypeStr() {
+		String type = null;
 
-    public String getIdKindStr()
-    {
-        String kind = null;
+		switch (idType) {
+			case INTEGER:
+				type = "integer";
+				break;
+			case BOOLEAN:
+				type = "boolean";
+				break;
+			case UNDEFINED:
+				type = "undefined";
+				break;
+		}
 
-        switch (idKind)
-        {
-            case SCALAR:
-                kind = "scalar";
-                break;
-            case ARRAY:
-                kind = "array";
-                break;
-            case PROCEDURE:
-                kind = "procedure";
-                break;
-            case FUNCTION:
-                kind = "function";
-                break;
-            case UNDEFINED:
-                kind = "undefined";
-                break;
-        }
+		return type;
+	}
 
-        return kind;
-    }
+	public String getIdKindStr() {
+		String kind = null;
 
+		switch (idKind) {
+			case SCALAR:
+				kind = "scalar";
+				break;
+			case ARRAY:
+				kind = "array";
+				break;
+			case PROCEDURE:
+				kind = "procedure";
+				break;
+			case FUNCTION:
+				kind = "function";
+				break;
+			case UNDEFINED:
+				kind = "undefined";
+				break;
+		}
 
-    public Bucket getNextBucket()
-    {
-        return nextBucket;
-    }
+		return kind;
+	}
 
-    public static final int INTEGER = 0;
-    public static final int BOOLEAN = 1;
-    public static final int UNDEFINED = -1;
+	public Bucket getNextBucket() {
+		return nextBucket;
+	}
 
-    public static final int SCALAR = 0;
-    public static final int ARRAY = 1;
-    public static final int PROCEDURE = 2;
-    public static final int FUNCTION = 3;
+	public int getCodeAddress() {
+		return codeAddress;
+	}
 
-    private String idName;
-    private int orderNum;
-    private int lexicLev;
-    private int idType;
-    private int idKind;
-    private Bucket nextBucket;
+	public static final int INTEGER = 0;
+	public static final int BOOLEAN = 1;
+	public static final int UNDEFINED = -1;
+
+	public static final int SCALAR = 0;
+	public static final int ARRAY = 1;
+	public static final int PROCEDURE = 2;
+	public static final int FUNCTION = 3;
+
+	private String idName;
+	private int orderNum;
+	private int lexicLev;
+	private int idType;
+	private int idKind;
+	private int codeAddress;
+	private Bucket nextBucket;
 }
