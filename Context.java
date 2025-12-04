@@ -61,7 +61,9 @@ class Context {
 									" error(s) detected.");
 					System.exit(1);
 				} else {
-					symbolHash.insert(new Bucket(currentStr));
+					Bucket bucket = new Bucket(currentStr);
+					bucket.setLexicLev(lexicalLevel);
+					symbolHash.insert(bucket);
 				}
 				symbolStack.push(currentStr);
 				break;
