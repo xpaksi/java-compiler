@@ -205,7 +205,7 @@ declaration        ::= VAR _current IDENT C3 C4 optArrayBound AS type C5 C11 C7
                    |   type FUNC _current IDENT C26 C22 R7 C0 C23 R2 funcBody
                    |   PROC _current IDENT C24 C22 R7 C0 R1 procBody ;
 
-funcBody           ::= EQ R4 expression C36 R33 C11 C11 C2 R6 R43 R9 C7
+funcBody           ::= EQ expression C36 C11 C11 C2 R6 R43 R9 C7
                    |   LPAREN optParameters C1 RPAREN EQ expression C36 C11 C11 R6 R43 R9 C7 ;
 
 procBody           ::= scope C2 R5 R42 R9 C7
