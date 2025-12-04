@@ -1,0 +1,13 @@
+{
+    var x: integer
+    var y: integer
+    var z: boolean
+
+    integer func getDouble = z
+    ;
+
+    x := 5
+    y := getDouble
+
+    put y
+}
