@@ -1,0 +1,4 @@
+Unmatched type at line 9: getDouble
+Type of integer expected at line 11: y
+
+2 error(s) found.

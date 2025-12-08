@@ -1,0 +1,12 @@
+{
+    var x: integer
+    var y: integer
+
+    integer func getDouble = x * 2
+    ;
+
+    x := 5
+    y := getDouble
+
+    put y
+}

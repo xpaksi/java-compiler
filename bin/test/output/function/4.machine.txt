@@ -1,0 +1,3 @@
+Unmatched function return type at line 6: z
+
+1 error(s) found.
