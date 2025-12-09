@@ -1,1 +1,1 @@
-Function already declared at line 7: getDouble
+Function with same signature already declared at line 7: getDouble

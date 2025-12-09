@@ -2,14 +2,11 @@
     var x: integer
     var y: integer
 		var c: boolean
+    integer func multiply( z: integer, a: integer ) = z * a
 
-    integer func getDouble( z: integer, a: integer ) = z * 2
-    boolean func getDouble( z: boolean ) = z
     ;
 
     x := 5
-    y := getDouble(y, 2)
-		c := getDouble(c)
-
+    y := multiply(5, 2)
     put y
 }

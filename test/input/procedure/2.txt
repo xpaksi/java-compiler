@@ -1,0 +1,27 @@
+{
+    var x: integer
+		var z: integer
+    proc multiplyX(y: integer)
+    {
+			;
+			x := x * y
+		}
+
+    proc multiply(y: integer, k: integer)
+    {
+			;
+			z := 1
+			z := z * y * k
+		}
+
+		;
+
+    x := 20
+		z := 10
+
+    multiplyX(2)
+    put x
+
+    multiply(3, 2)
+    put z
+}

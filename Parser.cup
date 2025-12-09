@@ -132,7 +132,7 @@ statement          ::= _current IDENT C6 assignOrCall
 optElse            ::= R10
                    |   ELSE R7 R10 statements R9 ;
 
-assignOrCall       ::= C28 C29 R45 R44 C7
+assignOrCall       ::=  C28 C29 R45 R44 C7
                     |   C28 LPAREN C30 R45 optArguments C32 RPAREN R44 C7
                     |   ASSGN C20 R31 assignExpression
                     |   LBRACKET C21 R40 subscript RBRACKET ASSGN assignExpression ;
