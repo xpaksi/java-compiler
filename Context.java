@@ -59,9 +59,9 @@ class Context {
 				lexicalLevel--;
 				break;
 			case 3:
-				if (symbolHash.isExist(currentStr, lexicalLevel)) {
-					System.out.println(
-							"Variable declared at line " + currentLine + ": " + currentStr);
+			if (symbolHash.isExist(currentStr, lexicalLevel)) {
+				System.err.println(
+						"Variable declared at line " + currentLine + ": " + currentStr);
 					errorCount++;
 					System.err.println(
 							"\nProcess terminated.\nAt least " +
@@ -82,9 +82,9 @@ class Context {
 				symbolHash.find(currentStr).setIdType(typeStack.peek());
 				break;
 			case 6:
-				if (!symbolHash.isExist(currentStr)) {
-					System.out.println(
-							"Variable undeclared at line " + currentLine + ": " + currentStr);
+			if (!symbolHash.isExist(currentStr)) {
+				System.err.println(
+						"Variable undeclared at line " + currentLine + ": " + currentStr);
 					errorCount++;
 					System.err.println(
 							"\nProcess terminated.\nAt least " +
@@ -114,79 +114,79 @@ class Context {
 				typeStack.pop();
 				break;
 			case 12:
-				switch (typeStack.peek()) {
-					case Bucket.BOOLEAN:
-						System.out.println(
-								"Type of integer expected at line " +
-										currentLine +
-										": " +
-										currentStr);
-						errorCount++;
-						break;
-					case Bucket.UNDEFINED:
-						System.out.println(
-								"Undefined type at line " + currentLine + ": " + currentStr);
-						errorCount++;
-						break;
-				}
-				break;
-			case 13:
-				switch (typeStack.peek()) {
-					case Bucket.INTEGER:
-						System.out.println(
-								"Type of boolean expected at line " +
-										currentLine +
-										": " +
-										currentStr);
-						errorCount++;
-						break;
-					case Bucket.UNDEFINED:
-						System.out.println(
-								"Undefined type at line " + currentLine + ": " + currentStr);
-						errorCount++;
-						break;
-				}
-				break;
-			case 14:
-				// C14: Check type match
-				int poppedType = typeStack.pop();
-				if (poppedType != typeStack.peek()) {
-					System.out.println(
-							"Unmatched type at line " + currentLine + ": " + currentStr);
-					errorCount++;
-				}
-				typeStack.push(poppedType);
-				break;
-			case 15:
-				// C15: Check integer type for comparison
-				int comparedType = typeStack.pop();
-				if ((comparedType != Bucket.INTEGER) && typeStack.peek() != Bucket.INTEGER) {
-					System.out.println(
-							"Unmatched type at line " + currentLine + ": " + currentStr);
-					errorCount++;
-				}
-				typeStack.push(comparedType);
-				break;
-			case 16:
-				// C16: Check assignment type match
-				int variableType = symbolHash.find(symbolStack.peek()).getIdType();
-				if (variableType != typeStack.peek()) {
-					System.out.println(
-							"Unmatched type at line " + currentLine + ": " + currentStr);
-					errorCount++;
-				}
-				break;
-			case 17:
-				// C17: Check variable is integer type
-				int varType = symbolHash.find(symbolStack.peek()).getIdType();
-				if (varType != Bucket.INTEGER) {
-					System.out.println(
+			switch (typeStack.peek()) {
+				case Bucket.BOOLEAN:
+					System.err.println(
 							"Type of integer expected at line " +
 									currentLine +
 									": " +
 									currentStr);
 					errorCount++;
-				}
+					break;
+				case Bucket.UNDEFINED:
+					System.err.println(
+							"Undefined type at line " + currentLine + ": " + currentStr);
+					errorCount++;
+					break;
+			}
+				break;
+		case 13:
+			switch (typeStack.peek()) {
+				case Bucket.INTEGER:
+					System.err.println(
+							"Type of boolean expected at line " +
+									currentLine +
+									": " +
+									currentStr);
+					errorCount++;
+					break;
+				case Bucket.UNDEFINED:
+					System.err.println(
+							"Undefined type at line " + currentLine + ": " + currentStr);
+					errorCount++;
+					break;
+			}
+				break;
+			case 14:
+			// C14: Check type match
+			int poppedType = typeStack.pop();
+			if (poppedType != typeStack.peek()) {
+				System.err.println(
+						"Unmatched type at line " + currentLine + ": " + currentStr);
+				errorCount++;
+			}
+				typeStack.push(poppedType);
+				break;
+			case 15:
+			// C15: Check integer type for comparison
+			int comparedType = typeStack.pop();
+			if ((comparedType != Bucket.INTEGER) && typeStack.peek() != Bucket.INTEGER) {
+				System.err.println(
+						"Unmatched type at line " + currentLine + ": " + currentStr);
+				errorCount++;
+			}
+				typeStack.push(comparedType);
+				break;
+			case 16:
+			// C16: Check assignment type match
+			int variableType = symbolHash.find(symbolStack.peek()).getIdType();
+			if (variableType != typeStack.peek()) {
+				System.err.println(
+						"Unmatched type at line " + currentLine + ": " + currentStr);
+				errorCount++;
+			}
+				break;
+			case 17:
+			// C17: Check variable is integer type
+			int varType = symbolHash.find(symbolStack.peek()).getIdType();
+			if (varType != Bucket.INTEGER) {
+				System.err.println(
+						"Type of integer expected at line " +
+								currentLine +
+								": " +
+								currentStr);
+				errorCount++;
+			}
 				break;
 			case 18:
 				symbolHash.find(currentStr).setIdKind(Bucket.SCALAR);
@@ -196,25 +196,25 @@ class Context {
 				symbolHash.find(currentStr).setIdKind(Bucket.ARRAY);
 				orderNumber += 3;
 				break;
-			case 20:
-				switch (symbolHash.find(symbolStack.peek()).getIdKind()) {
-					case Bucket.UNDEFINED:
-						System.out.println(
-								"Variable not fully defined at line " +
-										currentLine +
-										": " +
-										currentStr);
-						errorCount++;
-						break;
-					case Bucket.ARRAY:
-						System.out.println(
-								"Scalar variable expected at line " +
-										currentLine +
-										": " +
-										currentStr);
-						errorCount++;
-						break;
-				}
+		case 20:
+			switch (symbolHash.find(symbolStack.peek()).getIdKind()) {
+				case Bucket.UNDEFINED:
+					System.err.println(
+							"Variable not fully defined at line " +
+									currentLine +
+									": " +
+									currentStr);
+					errorCount++;
+					break;
+				case Bucket.ARRAY:
+					System.err.println(
+							"Scalar variable expected at line " +
+									currentLine +
+									": " +
+									currentStr);
+					errorCount++;
+					break;
+			}
 				break;
 			case 21:
 				switch (symbolHash.find(symbolStack.peek()).getIdKind()) {
@@ -280,11 +280,11 @@ class Context {
 				lexicalLevel--;
 				break;
 			case 28:
-				if (symbolHash.find(currentStr).getIdKind() != Bucket.PROCEDURE) {
-					System.out.println(
-							"Procedure expected at line " + currentLine + ": " + currentStr);
-					errorCount++;
-				}
+			if (symbolHash.find(currentStr).getIdKind() != Bucket.PROCEDURE) {
+				System.err.println(
+						"Procedure expected at line " + currentLine + ": " + currentStr);
+				errorCount++;
+			}
 				break;
 			case 29:
 				// C29: For no-args calls, find matching 0-parameter function/procedure
@@ -337,15 +337,15 @@ class Context {
 				List<Integer> argTypes = argTypesStack.pop();
 				int argumentCount = argCountStack.pop();
 
-				calleeBucket = symbolHash.findBySignature(calleeName, argTypes);
-				if (calleeBucket == null) {
-					System.out.println(
-							"No matching function/procedure for given arguments at line " +
-									currentLine +
-									": " +
-									calleeName);
-					errorCount++;
-				} else {
+			calleeBucket = symbolHash.findBySignature(calleeName, argTypes);
+			if (calleeBucket == null) {
+				System.err.println(
+						"No matching function/procedure for given arguments at line " +
+								currentLine +
+								": " +
+								calleeName);
+				errorCount++;
+			} else {
 					if (!calleeStack.isEmpty()) {
 						calleeStack.pop();
 						calleeStack.push(calleeBucket);
@@ -363,11 +363,11 @@ class Context {
 				}
 				break;
 			case 33:
-				if (symbolHash.find(currentStr).getIdKind() != Bucket.FUNCTION) {
-					System.out.println(
-							"Function expected at line " + currentLine + ": " + currentStr);
-					errorCount++;
-				}
+			if (symbolHash.find(currentStr).getIdKind() != Bucket.FUNCTION) {
+				System.err.println(
+						"Function expected at line " + currentLine + ": " + currentStr);
+				errorCount++;
+			}
 				break;
 			case 34:
 				if (!argCountStack.isEmpty()) {
@@ -397,22 +397,22 @@ class Context {
 					}
 
 					int declLevel = calleeBucket.getLexicLev();
-					if (symbolHash.isExist(
-							calleeName,
-							declLevel,
-							parameterList,
-							kind,
-							calleeBucket)) {
-						String kindStr = (kind == Bucket.FUNCTION)
-								? "Function"
-								: "Procedure";
-						System.out.println(
-								kindStr +
-										" with same signature already declared at line " +
-										currentLine +
-										": " +
-										calleeName);
-						errorCount++;
+				if (symbolHash.isExist(
+						calleeName,
+						declLevel,
+						parameterList,
+						kind,
+						calleeBucket)) {
+					String kindStr = (kind == Bucket.FUNCTION)
+							? "Function"
+							: "Procedure";
+					System.err.println(
+							kindStr +
+									" with same signature already declared at line " +
+									currentLine +
+									": " +
+									calleeName);
+					errorCount++;
 						System.err.println(
 								"\nProcess terminated.\nAt least " +
 										(errorCount + parser.yylex.num_error) +
@@ -427,42 +427,42 @@ class Context {
 				}
 				break;
 			case 36:
-				int functionReturnType = symbolHash
-						.find(symbolStack.peek())
-						.getIdType();
-				int expressionType = typeStack.peek();
-				if (functionReturnType != expressionType) {
-					System.out.println(
-							"Unmatched function return type at line " +
-									currentLine +
-									": " +
-									currentStr);
-					errorCount++;
-				}
+			int functionReturnType = symbolHash
+					.find(symbolStack.peek())
+					.getIdType();
+			int expressionType = typeStack.peek();
+			if (functionReturnType != expressionType) {
+				System.err.println(
+						"Unmatched function return type at line " +
+								currentLine +
+								": " +
+								currentStr);
+				errorCount++;
+			}
 				break;
 			case 37:
-				int identifierKind = symbolHash.find(currentStr).getIdKind();
-				if (identifierKind == Bucket.FUNCTION) {
-				} else {
-					switch (symbolHash.find(symbolStack.peek()).getIdKind()) {
-						case Bucket.UNDEFINED:
-							System.out.println(
-									"Variable not fully defined at line " +
-											currentLine +
-											": " +
-											currentStr);
-							errorCount++;
-							break;
-						case Bucket.ARRAY:
-							System.out.println(
-									"Scalar variable expected at line " +
-											currentLine +
-											": " +
-											currentStr);
-							errorCount++;
-							break;
-					}
+			int identifierKind = symbolHash.find(currentStr).getIdKind();
+			if (identifierKind == Bucket.FUNCTION) {
+			} else {
+				switch (symbolHash.find(symbolStack.peek()).getIdKind()) {
+					case Bucket.UNDEFINED:
+						System.err.println(
+								"Variable not fully defined at line " +
+										currentLine +
+										": " +
+										currentStr);
+						errorCount++;
+						break;
+					case Bucket.ARRAY:
+						System.err.println(
+								"Scalar variable expected at line " +
+										currentLine +
+										": " +
+										currentStr);
+						errorCount++;
+						break;
 				}
+			}
 				break;
 		}
 	}
