@@ -1,0 +1,26 @@
+{
+    var x: integer
+	var z: integer
+    proc multiply(y: integer)
+    {
+        ;
+        x := x * y
+    }
+
+    proc multiply(y: boolean)
+    {
+        ;
+        z := 1
+    }
+
+    ;
+
+    x := 20
+	z := 10
+
+    multiply(2)
+    put x
+
+    multiply(true)
+    put z
+}

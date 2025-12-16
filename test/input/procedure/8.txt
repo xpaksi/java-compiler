@@ -1,0 +1,19 @@
+{
+    var x: integer
+    integer func double(x: integer) =  x * 2
+
+    proc double(x: integer)
+    {
+			var x: integer
+			; 
+			x := 1
+    }
+
+    ;
+
+    x := 20
+
+    double(2)
+    put x
+
+}

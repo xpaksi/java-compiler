@@ -1,0 +1,26 @@
+{
+	var result: integer
+	var temp: integer
+	proc fib(n: integer)
+	{
+		var r1: integer
+		var r2: integer
+		;
+		if n = 0 then
+			result := 0
+		else
+			if n = 1 then
+				result := 1
+			else
+				fib(n - 1)
+				r1 := result
+				fib(n - 2)
+				r2 := result
+				result := r1 + r2
+			end if
+		end if
+	}
+	;
+	fib(6)
+	put result
+}

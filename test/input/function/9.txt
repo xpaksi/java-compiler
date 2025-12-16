@@ -1,0 +1,9 @@
+{
+	var k: integer	
+	integer func bar(x :integer) = x + 1
+	integer func foo(y: integer) = bar(y) + 1
+	;
+
+	k := foo(bar(foo(1)))
+	put k
+}

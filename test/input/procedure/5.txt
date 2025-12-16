@@ -1,0 +1,19 @@
+{
+	var k: integer
+	proc foo(y: integer)
+	{
+		var x: integer
+		proc bar(z: integer)
+		{
+		;
+		x := y + z
+		}
+		;
+		bar(2)
+		k := k + x
+	}
+	;
+	k := 0
+	foo()
+	put k
+}
